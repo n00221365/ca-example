@@ -14,13 +14,16 @@ class BookSeeder extends Seeder
      */
     public function run(): void
     {
-        $publisher = Publisher::where('name', 'Sample publisher 2')->first();
 
-        $book = new Book;
-        $book->title = "Sample Book 1";
-        $book->description = "Sample description";
-        $book->isbn = "54845rhfjdoire";
-        $book->publisher_id = $publisher->id;
-        $book->save();
+
+        Book::factory()->times(50)->create();
+       // $publisher = Publisher::where('name', 'Sample publisher 2')->first();
+
+     //   $book = new Book;
+        //$book->title = "Sample Book 1";
+        //$book->description = "Sample description";
+      //  $book->isbn = "54845rhfjdoire";
+       // $book->publisher_id = $publisher->id;
+       // $book->save();
     }
 }
