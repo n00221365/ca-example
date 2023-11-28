@@ -8,6 +8,12 @@ use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\HomeController;
 
 
+use App\Http\Controllers\Admin\BookController as AdminBookController;
+use App\Http\Controllers\User\BookController as UserBookController;
+
+
+
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -31,7 +37,7 @@ Route::get('/dashboard', function () {
 
 Route::middleware('auth')->group(function () {
     Route::resource('publishers', PublisherController::class);
-   Route::resource('books', BookController::class);
+   //Route::resource('books', BookController::class);
     Route::resource('authors', AuthorController::class);
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -39,6 +45,16 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+
 
 Route::get('/home', [HomeController::class, 'index'])->name('home.index');
+Route::resource('/user/books', UserBookController::class)
+            ->middleware(['auth'])
+            ->names('user.books')
+            ->only(['index', 'show' ]);
+Route::resource('/admin/books', AdminBookController::class)->middleware(['auth', 'role:admin'])
+->names('admin.books');
+
+
 require __DIR__.'/auth.php';

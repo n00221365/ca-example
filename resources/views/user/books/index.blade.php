@@ -48,7 +48,7 @@
                                         {{ $book->publisher->name }}
                                     </td>
                                     <td class="px-6 py-4">
-                                        <a href="{{ route('books.show', $book->id) }}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">View</a>
+                                        <a href="{{ route('user.books.show', $book->id) }}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">View</a>
                                     </td> 
                                 </tr>
                                 @empty
