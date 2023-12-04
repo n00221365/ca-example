@@ -1,10 +1,12 @@
-a<x-app-layout>
-    <x-slot name="header">
+   @extends('layouts.admin')
+   
+   @section('header')
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
             {{ __('Books') }}
         </h2>
-    </x-slot>
+    <@endsection
 
+    @section('content')
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
@@ -65,8 +67,8 @@ a<x-app-layout>
             </div>
         </div>
     </div>
+    @endsection
 
-</x-app-layout>
 
 
 

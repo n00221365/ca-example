@@ -6,6 +6,8 @@ use App\Http\Controllers\PublisherController;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\DashboardController;
+
 
 
 use App\Http\Controllers\Admin\BookController as AdminBookController;
@@ -31,9 +33,7 @@ Route::get('/', function () {
 
 
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard',[DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::resource('publishers', PublisherController::class);
@@ -55,6 +55,20 @@ Route::resource('/user/books', UserBookController::class)
             ->only(['index', 'show' ]);
 Route::resource('/admin/books', AdminBookController::class)->middleware(['auth', 'role:admin'])
 ->names('admin.books');
+
+Route::resource('/user/authors', UserAuthorController::class)
+            ->middleware(['auth'])
+            ->names('user.authors')
+            ->only(['index', 'show' ]);
+Route::resource('/admin/authors', AdminAuthorController::class)->middleware(['auth', 'role:admin'])
+->names('admin.authors');
+
+Route::resource('/user/publishers', UserPublisherController::class)
+            ->middleware(['auth'])
+            ->names('user.publishers')
+            ->only(['index', 'show' ]);
+Route::resource('/admin/publishers', AdminPublisherController::class)->middleware(['auth', 'role:admin'])
+->names('admin.publishers');
 
 
 require __DIR__.'/auth.php';

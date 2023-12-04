@@ -22,7 +22,7 @@ class BookController extends Controller
      */
     public function show(string $id)
     {
-        $boomm = Book::findOrFail($id);
+        $books = Book::findOrFail($id);
 
         return view('user.books.show')->with('book', $book);
     }
